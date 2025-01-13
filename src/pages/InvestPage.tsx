@@ -169,7 +169,6 @@ function InvestPage() {
                       onChange={(e) => setFormData(prev => ({ ...prev, solanaAddress: e.target.value }))}
                       className="w-full px-4 py-2 bg-[#0A0B0F] border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B2C] focus:border-transparent"
                       required
-                      pattern="[1-9A-HJ-NP-Za-km-z]{32,44}"
                       placeholder="Enter Solana wallet address"
                     />
                   </div>
