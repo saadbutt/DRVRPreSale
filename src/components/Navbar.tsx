@@ -42,7 +42,7 @@ const Navbar = () => {
               Roadmap
             </button>
             <a 
-              href="https://drvr.gitbook.io/drvr/drvr-token/release-rate"
+              href="https://drvr.gitbook.io/drvr"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition-colors"
@@ -74,7 +74,7 @@ const Navbar = () => {
               Roadmap
             </button>
             <a 
-              href="https://drvr.gitbook.io/drvr/drvr-token/release-rate"
+              href="https://drvr.gitbook.io/drvr"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center text-gray-300 hover:text-white transition-colors py-2"

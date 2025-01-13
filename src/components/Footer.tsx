@@ -23,7 +23,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white w-fit">About Us</button>
               <button onClick={() => document.getElementById('roadmap')?.scrollIntoView({ behavior: 'smooth' })}
                 className="text-gray-400 hover:text-white w-fit">Roadmap</button>
-              <a href="https://drvr.gitbook.io/drvr/drvr-token/release-rate" 
+              <a href="https://drvr.gitbook.io/drvr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white w-fit">Whitepaper</a>

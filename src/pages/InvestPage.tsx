@@ -14,9 +14,9 @@ interface FormData {
 }
 
 const walletAddresses: WalletAddress[] = [
-  { name: 'Solana (SOL)', address: 'DRVRtkKwzFzBYxGkqvdEtEbkTHKZP6uUGJMz1J6AXBpj' },
-  { name: 'Ethereum (ETH)', address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e' },
-  { name: 'Tron USDT (TRC-20)', address: 'TYQJcpoH5JopZxUfYYxJtPfDbR7GR8ZuM9' }
+  { name: 'Solana (SOL)', address: 'EVxPcgCiJsc3p1gZHX24KasQZBY8mrvvMqa59eUMWEiS' },
+  { name: 'Ethereum (ETH)', address: '0x265340ca52e762Dc440d53756d958e29aC9cC903' },
+  { name: 'Tron USDT (TRC-20)', address: 'TUuQtVAMQ4s5CauFY2f3gkqopoddeC8F4J' }
 ];
 
 function InvestPage() {
