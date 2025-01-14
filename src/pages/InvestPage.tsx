@@ -51,7 +51,7 @@ function InvestPage() {
     setSuccess(false);
 
     try {
-      const response = await fetch('https://13.61.179.185:8080/api/submit-wallet', {
+      const response = await fetch('https://api.drvrtoken.com/api/submit-wallet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
