@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Loader2, X, Copy, Check, AlertCircle } from 'lucide-react';
+import { Check, Copy, AlertCircle } from 'lucide-react';
 import Section from '../components/Section';
 
 interface WalletAddress {
@@ -19,7 +19,7 @@ const walletAddresses: WalletAddress[] = [
   { name: 'Tron USDT (TRC-20)', address: 'TUuQtVAMQ4s5CauFY2f3gkqopoddeC8F4J' }
 ];
 
-function InvestPage() {
+const InvestPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
@@ -93,17 +93,12 @@ function InvestPage() {
               disabled={loading}
               className="bg-[#FF6B2C] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#FF8B4C] transition-colors disabled:opacity-50 flex items-center space-x-2"
             >
-              {loading ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                'View Wallet Addresses'
-              )}
+              {loading ? 'Loading...' : 'View Wallet Addresses'}
             </button>
           </div>
         </div>
       </Section>
 
-      {/* Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -118,7 +113,7 @@ function InvestPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="bg-[#1A1B1F] rounded-xl p-6 max-w-2xl w-full"
+              className="bg-[#1A1B1F] rounded-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">Investment Wallets</h2>
@@ -126,105 +121,106 @@ function InvestPage() {
                   onClick={() => setShowModal(false)}
                   className="text-gray-400 hover:text-white"
                 >
-                  <X size={24} />
+                  ✕
                 </button>
               </div>
 
-              <div className="space-y-4 mb-6">
+              <div className="mb-6">
+                <div className="bg-[#0A0B0F] p-4 rounded-lg space-y-2 text-sm">
+                  <p className="text-gray-300">
+                    <span className="text-[#FF6B2C]">Note:</span> Minimum investment $10,000 USD in USDT tokens
+                  </p>
+                  <p className="text-gray-300">
+                    Please verify wallet addresses carefully before sending funds
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-2 mb-6">
                 {walletAddresses.map(({ name, address }) => (
                   <div key={name} className="bg-[#0A0B0F] p-3 rounded-lg">
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between items-center">
                       <h3 className="font-semibold">{name}</h3>
                       <button
                         onClick={() => copyToClipboard(address)}
-                        className="text-[#FF6B2C] hover:text-[#FF8B4C] flex items-center space-x-1"
+                        className="text-[#FF6B2C] hover:text-[#FF8B4C] flex items-center space-x-2 px-2 py-0.5 rounded-lg bg-[#FF6B2C]/10"
                       >
                         {copiedAddress === address ? (
-                          <Check size={16} />
+                          <Check size={14} />
                         ) : (
-                          <Copy size={16} />
+                          <Copy size={14} />
                         )}
-                        <span className="text-sm">
+                        <span className="text-xs">
                           {copiedAddress === address ? 'Copied!' : 'Copy'}
                         </span>
                       </button>
                     </div>
-                    <p className="text-gray-400 font-mono text-sm break-all">
+                    <p className="text-gray-400 font-mono text-xs break-all bg-black/30 p-2 mt-1 rounded">
                       {address}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="border-t border-gray-800 pt-6 mb-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="solanaAddress" className="block text-sm font-medium mb-1">
-                      Enter your Solana wallet address to receive DRVR tokens
-                    </label>
-                    <input
-                      id="solanaAddress"
-                      type="text"
-                      value={formData.solanaAddress}
-                      onChange={(e) => setFormData(prev => ({ ...prev, solanaAddress: e.target.value }))}
-                      className="w-full px-4 py-2 bg-[#0A0B0F] border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B2C] focus:border-transparent"
-                      required
-                      placeholder="Enter Solana wallet address"
-                    />
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div>
+                  <label htmlFor="solanaAddress" className="block text-sm font-medium mb-1">
+                    Enter your Solana wallet address to receive DRVR tokens
+                  </label>
+                  <input
+                    id="solanaAddress"
+                    type="text"
+                    value={formData.solanaAddress}
+                    onChange={(e) => setFormData(prev => ({ ...prev, solanaAddress: e.target.value }))}
+                    className="w-full px-3 py-2 bg-[#0A0B0F] border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B2C] focus:border-transparent"
+                    required
+                    placeholder="Enter Solana wallet address"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="transactionHash" className="block text-sm font-medium mb-1">
+                    Enter your proof of investment (transaction hash)
+                  </label>
+                  <input
+                    id="transactionHash"
+                    type="text"
+                    value={formData.transactionHash}
+                    onChange={(e) => setFormData(prev => ({ ...prev, transactionHash: e.target.value }))}
+                    className="w-full px-3 py-2 bg-[#0A0B0F] border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B2C] focus:border-transparent"
+                    required
+                    placeholder="Enter transaction hash"
+                  />
+                </div>
+
+                {error && (
+                  <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-3 rounded-lg">
+                    <AlertCircle size={16} />
+                    <span className="text-sm">{error}</span>
                   </div>
+                )}
 
-                  <div>
-                    <label htmlFor="transactionHash" className="block text-sm font-medium mb-1">
-                      Enter your proof of investment (transaction hash)
-                    </label>
-                    <input
-                      id="transactionHash"
-                      type="text"
-                      value={formData.transactionHash}
-                      onChange={(e) => setFormData(prev => ({ ...prev, transactionHash: e.target.value }))}
-                      className="w-full px-4 py-2 bg-[#0A0B0F] border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B2C] focus:border-transparent"
-                      required
-                      placeholder="Enter transaction hash"
-                    />
+                {success && (
+                  <div className="flex items-center gap-2 text-green-500 bg-green-500/10 p-3 rounded-lg">
+                    <Check size={16} />
+                    <span className="text-sm">Wallet information submitted successfully!</span>
                   </div>
+                )}
 
-                  {error && (
-                    <div className="flex items-center gap-2 text-red-500 bg-red-500/10 p-2 rounded-lg">
-                      <AlertCircle size={16} />
-                      <span className="text-sm">{error}</span>
-                    </div>
-                  )}
-
-                  {success && (
-                    <div className="flex items-center gap-2 text-green-500 bg-green-500/10 p-2 rounded-lg">
-                      <Check size={16} />
-                      <span className="text-sm">Wallet information submitted successfully!</span>
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#FF6B2C] text-white py-2 rounded-lg font-semibold hover:bg-[#FF8B4C] transition-colors disabled:opacity-50"
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Submit Wallet Information'}
-                  </button>
-                </form>
-              </div>
-
-              <div className="bg-red-900/20 border border-red-500 rounded-lg p-3">
-                <p className="text-red-500 font-semibold mb-1">WARNING:</p>
-                <p className="text-gray-300 text-sm">
-                  MINIMUM INVESTMENT: $10,000 USD. Sending less than the minimum amount
-                  will result in permanent loss of funds.
-                </p>
-              </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#FF6B2C] text-white py-3 rounded-lg font-semibold hover:bg-[#FF8B4C] transition-colors disabled:opacity-50 text-sm"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Wallet Information'}
+                </button>
+              </form>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
-}
+};
 
 export default InvestPage;

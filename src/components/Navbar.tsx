@@ -35,12 +35,6 @@ const Navbar = () => {
             >
               About Us
             </button>
-            <button 
-              onClick={() => scrollToSection('roadmap')}
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Roadmap
-            </button>
             <a 
               href="https://drvr.gitbook.io/drvr"
               target="_blank"
@@ -66,12 +60,6 @@ const Navbar = () => {
               className="w-full text-center text-gray-300 hover:text-white transition-colors py-2"
             >
               About Us
-            </button>
-            <button 
-              onClick={() => scrollToSection('roadmap')}
-              className="w-full text-center text-gray-300 hover:text-white transition-colors py-2"
-            >
-              Roadmap
             </button>
             <a 
               href="https://drvr.gitbook.io/drvr"
