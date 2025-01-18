@@ -20,9 +20,7 @@ function App() {
           <section id="about" className="min-h-screen snap-start">
             <AboutPage />
           </section>
-          <section id="roadmap" className="min-h-screen snap-start">
-            <RoadmapPage />
-          </section>
+
           <section id="invest" className="min-h-screen snap-start">
             <InvestPage />
           </section>
